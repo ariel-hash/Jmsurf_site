@@ -1,1 +1,103 @@
-window.location.href = 'carrinho.html';
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrinho - JM Surf</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    header {
+      background-color: #000;
+      padding: 15px 20px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header a {
+      color: #facc15;
+      text-decoration: none;
+    }
+    main {
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #111;
+    }
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+    .item-name {
+      font-weight: bold;
+    }
+    .total {
+      text-align: right;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .finalizar {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span><strong>JM Surf</strong></span>
+    <a href="index.html">Voltar para a loja</a>
+  </header>
+
+  <main>
+    <h1>Seu Carrinho</h1>
+    <div id="cartItems"></div>
+    <div class="total" id="cartTotal">Total: R$ 0,00</div>
+    <button class="finalizar">Finalizar Pedido</button>
+  </main>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    let total = 0;
+
+    if (cart.length === 0) {
+      cartItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
+    } else {
+      cart.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `
+          <span class="item-name">${item.product}</span>
+          <span>R$ ${item.price.toFixed(2)}</span>
+        `;
+        cartItems.appendChild(div);
+        total += item.price;
+      });
+      cartTotal.innerText = `Total: R$ ${total.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
