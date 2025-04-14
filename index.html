@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -48,6 +49,7 @@
       text-align: center;
       width: 220px;
       transition: transform 0.3s;
+      cursor: pointer;
     }
     .product:hover {
       transform: scale(1.03);
@@ -64,6 +66,49 @@
       color: #facc15;
       font-weight: bold;
     }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 100%;
+    }
+    .modal-content h3 {
+      margin-top: 0;
+    }
+    .modal-content select,
+    .modal-content input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    .modal-content button {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .close {
+      float: right;
+      cursor: pointer;
+      font-size: 20px;
+      color: #333;
+    }
     footer {
       background: #000;
       color: #ccc;
@@ -75,17 +120,14 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: #25d366;
-      color: white;
-      border-radius: 50%;
+      background-color: transparent;
       width: 55px;
       height: 55px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      font-size: 28px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
       z-index: 1000;
     }
     @media (max-width: 600px) {
@@ -99,41 +141,62 @@
 <body>
   <header>
     <img src="logo_jm.png" alt="Logo JM Surf">
-  </header>  <section>
-    <h2>Sobre Nós</h2>
-    <p style="text-align:center">Na JM Surf, acreditamos que vestir bem é mostrar atitude. Trabalhamos com as melhores tendências de moda urbana, calçados estilosos e peças exclusivas para quem busca originalidade no dia a dia.</p>
-  </section>  <section>
+  </header>
+
+  <section>
     <h2>Produtos em Destaque</h2>
     <div class="products">
-      <div class="product">
+      <div class="product" onclick="openModal('Tênis Mizuno', '429,90')">
         <img src="produto_1.jpg" alt="Tênis Mizuno Preto">
         <p>Tênis Mizuno</p>
         <p class="price">R$ 429,90</p>
       </div>
-      <div class="product">
-        <img src="produto_2.jpg" alt="Conjunto Tommy Branco">
-        <p>Conjunto Tommy Branco</p>
-        <p class="price">R$ 279,90</p>
-      </div>
-      <div class="product">
-        <img src="produto_3.jpg" alt="Conjunto Tommy Preto">
-        <p>Conjunto Tommy Preto</p>
-        <p class="price">R$ 279,90</p>
-      </div>
-      <div class="product">
-        <img src="produto_4.jpg" alt="Conjunto Tommy Azul">
-        <p>Conjunto Tommy Azul</p>
-        <p class="price">R$ 279,90</p>
-      </div>
     </div>
-  </section>  <section>
+  </section>
+
+  <section>
     <h2>Fale Conosco</h2>
     <p style="text-align:center">Siga no Instagram: <a href="https://www.instagram.com/jmsurf_oficiial" target="_blank">@jmsurf_oficiial</a></p>
     <p style="text-align:center">Ou clique no botão do WhatsApp para falar direto com a loja.</p>
-  </section><a class="whatsapp" href="https://wa.me/5511941428220" target="_blank">📱</a>
+  </section>
+
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 id="productTitle"></h3>
+      <p id="productPrice"></p>
+      <label for="size">Tamanho:</label>
+      <select id="size">
+        <option>P</option>
+        <option>M</option>
+        <option>G</option>
+        <option>GG</option>
+      </select>
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" placeholder="Digite seu CEP">
+      <label for="cupom">Cupom de Desconto:</label>
+      <input type="text" id="cupom" placeholder="Digite seu cupom">
+      <button onclick="alert('Produto adicionado ao carrinho!')">Adicionar ao Carrinho</button>
+    </div>
+  </div>
+
+  <a class="whatsapp" href="https://wa.me/5511941428220" target="_blank">
+    <img src="whatsapp_icon.png" alt="WhatsApp" style="width: 100%; height: 100%; border-radius: 50%;">
+  </a>
 
   <footer>
     &copy; 2025 JM Surf Oficial. Desenvolvido com carinho por Ariel H. para fins de apresentação.
   </footer>
+
+  <script>
+    function openModal(title, price) {
+      document.getElementById('productTitle').innerText = title;
+      document.getElementById('productPrice').innerText = 'R$ ' + price;
+      document.getElementById('productModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('productModal').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
