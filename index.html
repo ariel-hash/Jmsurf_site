@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html><html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -9,27 +8,31 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f5f5f5;
-      color: #333;
+      background: #f3f3f3;
+      color: #111;
     }
     header {
       background: #000;
       color: #fff;
-      text-align: center;
-      padding: 40px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    header h1 {
-      font-size: 2.5rem;
-      margin: 0;
-    }
-    header p {
-      font-size: 1.2rem;
-      margin-top: 10px;
+    header img {
+      height: 60px;
     }
     section {
       padding: 30px 20px;
       max-width: 1000px;
       margin: auto;
+    }
+    section h2 {
+      text-align: center;
+      color: #000;
     }
     .products {
       display: flex;
@@ -44,6 +47,10 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       text-align: center;
       width: 220px;
+      transition: transform 0.3s;
+    }
+    .product:hover {
+      transform: scale(1.03);
     }
     .product img {
       width: 100%;
@@ -52,6 +59,10 @@
     }
     .product p {
       margin: 10px 0 5px;
+    }
+    .product .price {
+      color: #facc15;
+      font-weight: bold;
     }
     footer {
       background: #000;
@@ -78,12 +89,6 @@
       z-index: 1000;
     }
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.8rem;
-      }
-      header p {
-        font-size: 1rem;
-      }
       .product {
         width: 100%;
         max-width: 300px;
@@ -93,48 +98,39 @@
 </head>
 <body>
   <header>
-    <h1>JM Surf Oficial</h1>
-    <p>Moda Urbana e Streetwear com identidade própria</p>
-  </header>
-
-  <section>
+    <img src="logo_jm.png" alt="Logo JM Surf">
+  </header>  <section>
     <h2>Sobre Nós</h2>
-    <p>Na JM Surf, acreditamos que vestir bem é mostrar atitude. Trabalhamos com as melhores tendências de moda urbana, calçados estilosos e peças exclusivas para quem busca originalidade no dia a dia.</p>
-  </section>
-
-  <section>
+    <p style="text-align:center">Na JM Surf, acreditamos que vestir bem é mostrar atitude. Trabalhamos com as melhores tendências de moda urbana, calçados estilosos e peças exclusivas para quem busca originalidade no dia a dia.</p>
+  </section>  <section>
     <h2>Produtos em Destaque</h2>
     <div class="products">
       <div class="product">
         <img src="produto_1.jpg" alt="Tênis Mizuno Preto">
         <p>Tênis Mizuno</p>
-        <p>R$ 429,90</p>
+        <p class="price">R$ 429,90</p>
       </div>
       <div class="product">
         <img src="produto_2.jpg" alt="Conjunto Tommy Branco">
         <p>Conjunto Tommy Branco</p>
-        <p>R$ 279,90</p>
+        <p class="price">R$ 279,90</p>
       </div>
       <div class="product">
         <img src="produto_3.jpg" alt="Conjunto Tommy Preto">
         <p>Conjunto Tommy Preto</p>
-        <p>R$ 279,90</p>
+        <p class="price">R$ 279,90</p>
       </div>
       <div class="product">
         <img src="produto_4.jpg" alt="Conjunto Tommy Azul">
         <p>Conjunto Tommy Azul</p>
-        <p>R$ 279,90</p>
+        <p class="price">R$ 279,90</p>
       </div>
     </div>
-  </section>
-
-  <section>
+  </section>  <section>
     <h2>Fale Conosco</h2>
-    <p>Siga no Instagram: <a href="https://www.instagram.com/jmsurf_oficiial" target="_blank">@jmsurf_oficiial</a></p>
-    <p>Ou clique no botão do WhatsApp para falar direto com a loja.</p>
-  </section>
-
-  <a class="whatsapp" href="https://wa.me/5511941428220" target="_blank">&#128241;</a>
+    <p style="text-align:center">Siga no Instagram: <a href="https://www.instagram.com/jmsurf_oficiial" target="_blank">@jmsurf_oficiial</a></p>
+    <p style="text-align:center">Ou clique no botão do WhatsApp para falar direto com a loja.</p>
+  </section><a class="whatsapp" href="https://wa.me/5511941428220" target="_blank">📱</a>
 
   <footer>
     &copy; 2025 JM Surf Oficial. Desenvolvido com carinho por Ariel H. para fins de apresentação.
