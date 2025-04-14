@@ -1,24 +1,34 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html><html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>JM Surf Oficial</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-      background: #f4f4f4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
       color: #333;
     }
     header {
       background: #000;
       color: #fff;
-      padding: 20px;
       text-align: center;
+      padding: 40px 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
     }
     section {
-      padding: 20px;
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: auto;
     }
     .products {
       display: flex;
@@ -27,28 +37,27 @@
       justify-content: center;
     }
     .product {
-      background: white;
+      background: #fff;
       padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       text-align: center;
-      width: 200px;
+      width: 220px;
     }
     .product img {
       width: 100%;
       height: auto;
-      border-radius: 4px;
+      border-radius: 8px;
+    }
+    .product p {
+      margin: 10px 0 5px;
     }
     footer {
-      background: #222;
-      color: #aaa;
+      background: #000;
+      color: #ccc;
       text-align: center;
-      padding: 15px;
+      padding: 20px;
       font-size: 14px;
-    }
-    a {
-      color: #1a73e8;
-      text-decoration: none;
     }
     .whatsapp {
       position: fixed;
@@ -57,36 +66,69 @@
       background-color: #25d366;
       color: white;
       border-radius: 50%;
-      width: 60px;
-      height: 60px;
+      width: 55px;
+      height: 55px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      font-size: 30px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      font-size: 28px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
       z-index: 1000;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      .product {
+        width: 100%;
+        max-width: 300px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>JM Surf Oficial</h1>
-    <p>Moda Urbana e Streetwear</p>
-  </header>
-
-  <section>
+    <p>Moda Urbana e Streetwear com identidade própria</p>
+  </header>  <section>
     <h2>Sobre Nós</h2>
-    <p>Somos uma loja de roupas com estilo urbano, tênis, streetwear e muito mais! Estamos em constante atualização com as tendências mais quentes do momento.</p>
-  </section>
-
-  <section>
-    <h2>Produtos</h2>
+    <p>Na JM Surf, acreditamos que vestir bem é mostrar atitude. Trabalhamos com as melhores tendências de moda urbana, calçados estilosos e peças exclusivas para quem busca originalidade no dia a dia.</p>
+  </section>  <section>
+    <h2>Produtos em Destaque</h2>
     <div class="products">
       <div class="product">
-        <img src="https://images.unsplash.com/photo-1618354691373-6019b1f0003e?auto=format&fit=crop&w=400&q=80" alt="Camiseta Oversized">
+        <img src="https://i.imgur.com/X2c9BTS.jpg" alt="Camiseta Oversized">
         <p>Camiseta Oversized</p>
         <p>R$ 79,90</p>
       </div>
       <div class="product">
-        <
+        <img src="https://i.imgur.com/VBu7Jmf.jpg" alt="Tênis Branco Street">
+        <p>Tênis Street Branco</p>
+        <p>R$ 249,90</p>
+      </div>
+      <div class="product">
+        <img src="https://i.imgur.com/4WyqqGS.jpg" alt="Bermuda Cargo">
+        <p>Bermuda Cargo Preta</p>
+        <p>R$ 99,90</p>
+      </div>
+      <div class="product">
+        <img src="https://i.imgur.com/v4OHHkA.jpg" alt="Boné Snapback">
+        <p>Boné Urban Style</p>
+        <p>R$ 59,90</p>
+      </div>
+    </div>
+  </section>  <section>
+    <h2>Fale Conosco</h2>
+    <p>Siga no Instagram: <a href="https://www.instagram.com/jmsurf_oficiial" target="_blank">@jmsurf_oficiial</a></p>
+    <p>Ou clique no botão do WhatsApp para falar direto com a loja.</p>
+  </section><a class="whatsapp" href="https://wa.me/5511941428220" target="_blank">📱</a>
+
+  <footer>
+    &copy; 2025 JM Surf Oficial. Desenvolvido com carinho por Ariel H. para fins de apresentação.
+  </footer>
+</body>
+</html>
