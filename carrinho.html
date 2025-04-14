@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html><html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,7 +44,7 @@
     .item-name {
       font-weight: bold;
     }
-    .total {
+    .total, .frete {
       text-align: right;
       margin-top: 20px;
       font-size: 18px;
@@ -62,25 +61,49 @@
       cursor: pointer;
       margin-top: 20px;
     }
+    .cep-section {
+      margin-top: 20px;
+    }
+    .cep-section input {
+      width: 200px;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .cep-section button {
+      padding: 8px 12px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .frete-info {
+      margin-top: 10px;
+      text-align: right;
+    }
   </style>
 </head>
 <body>
   <header>
     <span><strong>JM Surf</strong></span>
     <a href="index.html">Voltar para a loja</a>
-  </header>
-
-  <main>
+  </header>  <main>
     <h1>Seu Carrinho</h1>
     <div id="cartItems"></div>
+    <div class="cep-section">
+      <input type="text" id="cep" placeholder="Digite seu CEP">
+      <button onclick="calcularFrete()">Calcular Frete</button>
+      <div class="frete-info" id="freteInfo"></div>
+    </div>
+    <div class="frete" id="freteValor"></div>
     <div class="total" id="cartTotal">Total: R$ 0,00</div>
     <button class="finalizar">Finalizar Pedido</button>
-  </main>
-
-  <script>
+  </main>  <script>
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartItems = document.getElementById('cartItems');
     const cartTotal = document.getElementById('cartTotal');
+    const freteValor = document.getElementById('freteValor');
     let total = 0;
 
     if (cart.length === 0) {
@@ -98,6 +121,38 @@
       });
       cartTotal.innerText = `Total: R$ ${total.toFixed(2)}`;
     }
-  </script>
-</body>
+
+    function calcularFrete() {
+      const cep = document.getElementById('cep').value;
+      const info = document.getElementById('freteInfo');
+      if (cep.length !== 8) {
+        info.innerText = 'Digite um CEP válido (8 dígitos).';
+        return;
+      }
+
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.erro) {
+            info.innerText = 'CEP não encontrado.';
+            return;
+          }
+          const estado = data.uf;
+          let frete = 35;
+
+          if (estado === 'SP') frete = 10;
+          else if (['RJ', 'MG', 'ES'].includes(estado)) frete = 18;
+          else if (['PR', 'SC', 'RS'].includes(estado)) frete = 25;
+          else if (['GO', 'MT', 'MS', 'DF'].includes(estado)) frete = 30;
+          else if (['BA', 'PE', 'CE', 'RN', 'PB', 'AL', 'SE', 'PI', 'MA'].includes(estado)) frete = 35;
+          else if (['AM', 'PA', 'RO', 'RR', 'AC', 'TO', 'AP'].includes(estado)) frete = 40;
+
+          freteValor.innerText = `Frete: R$ ${frete.toFixed(2)} (para ${data.localidade} - ${estado})`;
+          cartTotal.innerText = `Total: R$ ${(total + frete).toFixed(2)}`;
+        })
+        .catch(() => {
+          info.innerText = 'Erro ao buscar o CEP.';
+        });
+    }
+  </script></body>
 </html>
