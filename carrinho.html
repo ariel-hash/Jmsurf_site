@@ -5,154 +5,112 @@
   <title>Carrinho - JM Surf</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
       background-color: #f4f4f4;
     }
     header {
       background-color: #000;
-      padding: 15px 20px;
       color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    header a {
-      color: #facc15;
-      text-decoration: none;
+      padding: 15px;
+      text-align: center;
     }
     main {
       max-width: 800px;
-      margin: 30px auto;
-      background: #fff;
+      margin: 20px auto;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     h1 {
       text-align: center;
-      color: #111;
     }
     .item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #ccc;
       padding: 10px 0;
     }
-    .item-name {
-      font-weight: bold;
+    .item-info {
+      flex-grow: 1;
     }
-    .total, .frete {
+    .item button {
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .total {
       text-align: right;
       margin-top: 20px;
       font-size: 18px;
       font-weight: bold;
     }
     .finalizar {
-      background-color: #000;
-      color: #fff;
-      border: none;
-      padding: 12px;
+      background: black;
+      color: white;
+      padding: 10px;
       width: 100%;
-      border-radius: 5px;
+      border: none;
+      border-radius: 6px;
       font-size: 16px;
       cursor: pointer;
       margin-top: 20px;
-    }
-    .cep-section {
-      margin-top: 20px;
-    }
-    .cep-section input {
-      width: 200px;
-      padding: 8px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    .cep-section button {
-      padding: 8px 12px;
-      background: #000;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .frete-info {
-      margin-top: 10px;
-      text-align: right;
     }
   </style>
 </head>
 <body>
   <header>
-    <span><strong>JM Surf</strong></span>
-    <a href="index.html">Voltar para a loja</a>
+    <h2>Seu Carrinho</h2>
   </header>  <main>
-    <h1>Seu Carrinho</h1>
-    <div id="cartItems"></div>
-    <div class="cep-section">
-      <input type="text" id="cep" placeholder="Digite seu CEP">
-      <button onclick="calcularFrete()">Calcular Frete</button>
-      <div class="frete-info" id="freteInfo"></div>
-    </div>
-    <div class="frete" id="freteValor"></div>
-    <div class="total" id="cartTotal">Total: R$ 0,00</div>
+    <div id="carrinho"></div>
+    <div class="total" id="total"></div>
     <button class="finalizar">Finalizar Pedido</button>
   </main>  <script>
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    const freteValor = document.getElementById('freteValor');
-    let total = 0;
+    const carrinhoEl = document.getElementById('carrinho');
+    const totalEl = document.getElementById('total');
 
-    if (cart.length === 0) {
-      cartItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
-    } else {
-      cart.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'item';
-        div.innerHTML = `
-          <span class="item-name">${item.product}</span>
-          <span>R$ ${item.price.toFixed(2)}</span>
-        `;
-        cartItems.appendChild(div);
-        total += item.price;
-      });
-      cartTotal.innerText = `Total: R$ ${total.toFixed(2)}`;
-    }
+    function carregarCarrinho() {
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      carrinhoEl.innerHTML = '';
+      let total = 0;
 
-    function calcularFrete() {
-      const cep = document.getElementById('cep').value;
-      const info = document.getElementById('freteInfo');
-      if (cep.length !== 8) {
-        info.innerText = 'Digite um CEP válido (8 dígitos).';
+      if (carrinho.length === 0) {
+        carrinhoEl.innerHTML = '<p>Seu carrinho está vazio.</p>';
+        totalEl.textContent = '';
         return;
       }
 
-      fetch(`https://viacep.com.br/ws/${cep}/json/`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.erro) {
-            info.innerText = 'CEP não encontrado.';
-            return;
-          }
-          const estado = data.uf;
-          let frete = 35;
+      carrinho.forEach((item, index) => {
+        total += item.preco;
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `
+          <div class="item-info">
+            <strong>${item.produto}</strong> <br>
+            Tamanho: ${item.tamanho} <br>
+            CEP: ${item.cep || '-'} | Cupom: ${item.cupom || '-'} <br>
+            <span>R$ ${item.preco.toFixed(2)}</span>
+          </div>
+          <button onclick="removerItem(${index})">Excluir</button>
+        `;
+        carrinhoEl.appendChild(div);
+      });
 
-          if (estado === 'SP') frete = 10;
-          else if (['RJ', 'MG', 'ES'].includes(estado)) frete = 18;
-          else if (['PR', 'SC', 'RS'].includes(estado)) frete = 25;
-          else if (['GO', 'MT', 'MS', 'DF'].includes(estado)) frete = 30;
-          else if (['BA', 'PE', 'CE', 'RN', 'PB', 'AL', 'SE', 'PI', 'MA'].includes(estado)) frete = 35;
-          else if (['AM', 'PA', 'RO', 'RR', 'AC', 'TO', 'AP'].includes(estado)) frete = 40;
-
-          freteValor.innerText = `Frete: R$ ${frete.toFixed(2)} (para ${data.localidade} - ${estado})`;
-          cartTotal.innerText = `Total: R$ ${(total + frete).toFixed(2)}`;
-        })
-        .catch(() => {
-          info.innerText = 'Erro ao buscar o CEP.';
-        });
+      totalEl.textContent = `Total: R$ ${total.toFixed(2)}`;
     }
+
+    function removerItem(index) {
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      carrinho.splice(index, 1);
+      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+      carregarCarrinho();
+    }
+
+    carregarCarrinho();
   </script></body>
 </html>
