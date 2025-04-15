@@ -116,6 +116,11 @@
       cursor: pointer;
     }
   </style>
+  <script>
+    if (!localStorage.getItem('usuario')) {
+      window.location.href = 'login.html';
+    }
+  </script>
 </head>
 <body>  <header>
     <img src="logo_jm.png" alt="Logo JM Surf" class="logo">
