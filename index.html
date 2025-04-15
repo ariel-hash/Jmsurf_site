@@ -1,119 +1,65 @@
 <!DOCTYPE html><html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JM Surf Oficial</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrinho - JM Surf</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f6f6f6;
+      margin: 0;
+      background-color: #f4f4f4;
     }
     header {
-      background-color: white;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    header img.logo {
-      height: 40px;
-    }
-    .search-bar {
-      width: 60%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-    .cart-icon {
-      width: 28px;
-      height: 28px;
-      cursor: pointer;
-    }
-    video.banner {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-      max-height: 350px;
-    }
-    h2.section-title {
-      text-align: center;
-      font-size: 24px;
-      margin: 30px 0 20px;
-      font-weight: bold;
-    }
-    .product-card {
-      background: white;
-      margin: 15px auto;
-      width: 90%;
-      max-width: 400px;
+      background-color: #000;
+      color: #fff;
       padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       text-align: center;
     }
-    .product-card img {
-      width: 100%;
-      border-radius: 8px;
-    }
-    .product-card h3 {
-      margin: 10px 0 5px;
-    }
-    .product-card p {
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .product-card button {
-      margin-top: 10px;
-      background: black;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .whatsapp-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      z-index: 999;
-    }
-    .popup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .popup-content {
-      background: white;
+    main {
+      max-width: 800px;
+      margin: 20px auto;
       padding: 20px;
-      border-radius: 10px;
-      max-width: 300px;
-      width: 90%;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    .popup-content h3 {
-      margin-top: 0;
+    h1 {
+      text-align: center;
     }
-    .popup-content label, select, input {
-      width: 100%;
-      margin-bottom: 10px;
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
     }
-    .popup-content button {
-      padding: 10px;
-      width: 100%;
-      background: black;
+    .item-info {
+      flex-grow: 1;
+    }
+    .item button {
+      background: #ff4d4d;
       color: white;
       border: none;
-      border-radius: 6px;
+      padding: 5px 10px;
+      border-radius: 4px;
       cursor: pointer;
+    }
+    .total {
+      text-align: right;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .finalizar {
+      background: black;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
     }
   </style>
   <script>
@@ -122,85 +68,54 @@
     }
   </script>
 </head>
-<body>  <header>
-    <img src="logo_jm.png" alt="Logo JM Surf" class="logo">
-    <input type="text" class="search-bar" placeholder="Buscar produtos...">
-    <a href="carrinho.html">
-      <img src="cart_icon.png" alt="Carrinho" class="cart-icon">
-    </a>
-  </header>  <video class="banner" autoplay muted loop playsinline>
-    <source src="vídeo-jmsurf.mp4" type="video/mp4">
-    Seu navegador não suporta vídeo.
-  </video>  <h2 class="section-title">Produtos em Destaque</h2>  <div class="product-card">
-    <img src="produto_1.jpg" alt="Tênis Mizuno Preto">
-    <h3>Tênis Mizuno</h3>
-    <p>R$ 429,90</p>
-    <button onclick="abrirPopup('Tênis Mizuno', 429.90)">Ver detalhes</button>
-  </div>  <div class="product-card">
-    <img src="produto_2.jpg" alt="Conjunto Tommy Branco">
-    <h3>Conjunto Tommy Branco</h3>
-    <p>R$ 279,90</p>
-    <button onclick="abrirPopup('Conjunto Tommy Branco', 279.90)">Ver detalhes</button>
-  </div>  <div class="product-card">
-    <img src="produto_3.jpg" alt="Conjunto Tommy Preto">
-    <h3>Conjunto Tommy Preto</h3>
-    <p>R$ 279,90</p>
-    <button onclick="abrirPopup('Conjunto Tommy Preto', 279.90)">Ver detalhes</button>
-  </div>  <div class="product-card">
-    <img src="produto_4.jpg" alt="Conjunto Tommy Azul">
-    <h3>Conjunto Tommy Azul</h3>
-    <p>R$ 279,90</p>
-    <button onclick="abrirPopup('Conjunto Tommy Azul', 279.90)">Ver detalhes</button>
-  </div>  <div class="popup" id="popup">
-    <div class="popup-content">
-      <h3 id="popupTitle"></h3>
-      <label for="tamanho">Tamanho:</label>
-      <select id="tamanho">
-        <option>P</option>
-        <option>M</option>
-        <option>G</option>
-        <option>GG</option>
-      </select>
-      <label for="cep">CEP:</label>
-      <input type="text" id="cep" placeholder="Digite seu CEP">
-      <label for="cupom">Cupom:</label>
-      <input type="text" id="cupom" placeholder="Cupom de desconto">
-      <button onclick="adicionarCarrinho()">Adicionar ao Carrinho</button>
-      <button onclick="fecharPopup()" style="margin-top: 10px; background:#ccc; color:black">Cancelar</button>
-    </div>
-  </div>  <a href="https://wa.me/5511941428220" target="_blank">
-    <img src="icone_do_whatsapp.png" alt="WhatsApp" class="whatsapp-button">
-  </a>  <script>
-    let produtoSelecionado = '';
-    let precoSelecionado = 0;
+<body>
+  <header>
+    <h2>Seu Carrinho</h2>
+  </header>  <main>
+    <div id="carrinho"></div>
+    <div class="total" id="total"></div>
+    <button class="finalizar">Finalizar Pedido</button>
+  </main>  <script>
+    const carrinhoEl = document.getElementById('carrinho');
+    const totalEl = document.getElementById('total');
 
-    function abrirPopup(produto, preco) {
-      produtoSelecionado = produto;
-      precoSelecionado = preco;
-      document.getElementById('popupTitle').innerText = produto;
-      document.getElementById('popup').style.display = 'flex';
+    function carregarCarrinho() {
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      carrinhoEl.innerHTML = '';
+      let total = 0;
+
+      if (carrinho.length === 0) {
+        carrinhoEl.innerHTML = '<p>Seu carrinho está vazio.</p>';
+        totalEl.textContent = '';
+        return;
+      }
+
+      carrinho.forEach((item, index) => {
+        total += item.preco;
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `
+          <div class="item-info">
+            <strong>${item.produto}</strong> <br>
+            Tamanho: ${item.tamanho} <br>
+            CEP: ${item.cep || '-'} | Cupom: ${item.cupom || '-'} <br>
+            <span>R$ ${item.preco.toFixed(2)}</span>
+          </div>
+          <button onclick="removerItem(${index})">Excluir</button>
+        `;
+        carrinhoEl.appendChild(div);
+      });
+
+      totalEl.textContent = `Total: R$ ${total.toFixed(2)}`;
     }
 
-    function fecharPopup() {
-      document.getElementById('popup').style.display = 'none';
-    }
-
-    function adicionarCarrinho() {
-      const tamanho = document.getElementById('tamanho').value;
-      const cep = document.getElementById('cep').value;
-      const cupom = document.getElementById('cupom').value;
-      const item = {
-        produto: produtoSelecionado,
-        preco: precoSelecionado,
-        tamanho,
-        cep,
-        cupom
-      };
+    function removerItem(index) {
       let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-      carrinho.push(item);
+      carrinho.splice(index, 1);
       localStorage.setItem('carrinho', JSON.stringify(carrinho));
-      fecharPopup();
-      alert('Produto adicionado com sucesso!');
+      carregarCarrinho();
     }
+
+    carregarCarrinho();
   </script></body>
 </html>
